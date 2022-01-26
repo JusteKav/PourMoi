@@ -7,18 +7,20 @@ import NavbarAndFooterLayout from './components/layouts/navbar-and-footer-layout
 import ViewportLayout from './components/layouts/viewport-layout';
 import ItemPage from './pages/item-page';
 import HomePage from './pages/home-page/index';
-import ItemsPage from './pages/items-page';
+import ItemsPage from './pages/items-page/';
 import OrderPage from './pages/order-page';
 import ProfilePage from './pages/profile-page';
 import LoginPage from './pages/login-page';
 import RegisterPage from './pages/register-page';
 import MemorizedItemsPage from './pages/memorized-items-page';
+// import ScrollToTop from './components/partials/helpers/scroll-to-top-helper';
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        {/* <ScrollToTop /> */}
         <Routes>
           <Route path="/" element={<NavbarAndFooterLayout />}>
             <Route index element={<HomePage />} />

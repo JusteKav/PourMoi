@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material/styles';
-import { useTheme } from '@mui/material';
 
 export const theme = createTheme({
   mixins: {
@@ -11,6 +10,11 @@ export const theme = createTheme({
     },
     minNavbarAndFooterLayoutHeight: {
       height: `calc(100vh - 90px - 44px)`,
+    },
+  },
+  paper: {
+    '&:focus': {
+      outline: 'none',
     },
   },
   palette: {

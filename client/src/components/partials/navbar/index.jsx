@@ -1,6 +1,5 @@
 import { AppBar, Grid, Divider } from '@mui/material';
-import Mobile from './navbar-mobile';
-import Desktop from './navbar-desktop';
+import ShopMenu from './navbar-shop-menu';
 import UserMenu from './navbar-user-menu';
 
 const Navbar = () => {
@@ -16,8 +15,7 @@ const Navbar = () => {
         </Grid>
         <Grid item xs={12} sx={{ height: '50%' }}>
           <Divider variant="fullWidth" color="black" />
-          <Mobile />
-          <Desktop />
+          <ShopMenu />
         </Grid>
       </Grid>
     </AppBar>
