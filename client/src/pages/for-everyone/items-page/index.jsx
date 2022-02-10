@@ -1,6 +1,6 @@
 import { Grid, Typography, Divider } from '@mui/material';
-import AlignmentContainer from '../../components/partials/containers/alignment-container';
-import ItemCard from '../../components/partials/cards/cards-item-card';
+import AlignmentContainer from '../../../components/partials/containers/alignment-container';
+import ItemCard from '../../../components/partials/cards/cards-item-card';
 import SortIcon from '@mui/icons-material/Sort';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import ItemsPageSidebar from './items-page-sidebar';

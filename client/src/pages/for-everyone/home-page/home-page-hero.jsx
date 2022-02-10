@@ -1,6 +1,6 @@
-import MainGif from '../../images/home-page-gif.gif';
+import MainGif from '../../../images/home-page-gif.gif';
 import { Button, Grid } from '@mui/material';
-import BackgroundImageContainer from '../../components/partials/containers/background-image-container';
+import BackgroundImageContainer from '../../../components/partials/containers/background-image-container';
 
 const Hero = () => {
   return (

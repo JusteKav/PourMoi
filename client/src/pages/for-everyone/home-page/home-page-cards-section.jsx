@@ -1,6 +1,6 @@
-import ItemCard from '../../components/partials/cards/cards-item-card';
+import ItemCard from '../../../components/partials/cards/cards-item-card';
 import { Grid } from '@mui/material';
-import AlignmentContainer from '../../components/partials/containers/alignment-container';
+import AlignmentContainer from '../../../components/partials/containers/alignment-container';
 
 const homePageCardData = [
   {

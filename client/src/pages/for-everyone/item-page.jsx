@@ -1,5 +1,5 @@
 import { Grid, Typography, Button, Divider, Box, useTheme } from '@mui/material';
-import AlignmentContainer from '../components/partials/containers/alignment-container';
+import AlignmentContainer from '../../components/partials/containers/alignment-container';
 import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
 import DiamondOutlinedIcon from '@mui/icons-material/DiamondOutlined';
 import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
@@ -36,7 +36,12 @@ const ItemPage = () => {
   ];
 
   return (
-    <AlignmentContainer sx={{ minHeight: theme.mixins.minNavbarAndFooterLayoutHeight.height, alignItems: 'start' }}>
+    <AlignmentContainer
+      sx={{
+        minHeight: `calc(100vh - ${theme.mixins.footer.height}  - ${theme.mixins.navbar.height}) `,
+        alignItems: 'start',
+      }}
+    >
       <Grid container>
         <Grid item xs={12} sx={{ pb: 4 }}>
           <Typography variant="regularTextXs">🠔 Back</Typography>

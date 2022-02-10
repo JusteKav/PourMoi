@@ -28,6 +28,7 @@ const userSchema = new Mongoose.Schema(
       enum: ['USER', 'ADMIN'],
       default: 'USER',
     },
+
     name: {
       type: 'string',
       required: true,

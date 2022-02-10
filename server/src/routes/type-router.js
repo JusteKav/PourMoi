@@ -7,7 +7,7 @@ const {
   deleteType,
   updateType,
   replaceType,
-} = require('../controllers/jewelry-type-controller');
+} = require('../controllers/type-controller');
 
 router.get('/', getTypes);
 router.post('/', createType);

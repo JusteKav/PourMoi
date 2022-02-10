@@ -8,13 +8,19 @@ export const theme = createTheme({
     footer: {
       height: '44px',
     },
-    minNavbarAndFooterLayoutHeight: {
-      height: `calc(100vh - 90px - 44px)`,
-    },
   },
-  paper: {
-    '&:focus': {
-      outline: 'none',
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#000000',
+          color: '#ffffff',
+          '&:hover': {
+            backgroundColor: '#ebd6b0',
+            color: '#ffffff',
+          },
+        },
+      },
     },
   },
   palette: {
@@ -40,6 +46,10 @@ export const theme = createTheme({
     boldTextM: {
       fontSize: 20,
       fontWeight: 400,
+    },
+    lightTextXl: {
+      fontSize: 40,
+      fontWeight: 300,
     },
     fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
     fontSize: 12,
