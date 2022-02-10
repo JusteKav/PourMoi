@@ -6,7 +6,7 @@ const {
   getType,
   deleteType,
   updateType,
-  replaceType,
+  //   replaceType,
 } = require('../controllers/type-controller');
 
 router.get('/', getTypes);
@@ -14,6 +14,6 @@ router.post('/', createType);
 router.get('/:id', getType);
 router.delete('/:id', deleteType);
 router.patch('/:id', updateType);
-router.put('/:id', replaceType);
+// router.put('/:id', replaceType);
 
 module.exports = router;

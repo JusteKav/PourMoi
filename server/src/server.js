@@ -3,9 +3,14 @@ const morgan = require('morgan');
 const Mongoose = require('mongoose');
 require('dotenv').config();
 const cors = require('cors');
+
 const authRouter = require('./routes/auth-router');
 const userRouter = require('./routes/user-router');
 const typeRouter = require('./routes/type-router');
+const materialRouter = require('./routes/material-router');
+const stoneRouter = require('./routes/stone-router');
+const colorRouter = require('./routes/color-router');
+const jewelryRouter = require('./routes/jewelry-router');
 
 const server = express();
 const { SERVER_PORT, DB_CONNECTION } = process.env;
@@ -23,6 +28,10 @@ server.use(express.json());
 server.use('/api/auth', authRouter);
 server.use('/api/users', userRouter);
 server.use('/types', typeRouter);
+server.use('/materials', materialRouter);
+server.use('/stones', stoneRouter);
+server.use('/colors', colorRouter);
+server.use('/jewelries', jewelryRouter);
 
 server.listen(SERVER_PORT, () => {
   console.log(`puslapis veikia ant http://localhost:${SERVER_PORT}/`);
