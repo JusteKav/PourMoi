@@ -23,6 +23,7 @@ const corsOptions = {
 server.use(morgan('tiny'));
 server.use(cors(corsOptions));
 server.use(express.json());
+server.use(express.static('public/assets/images'));
 
 // Response handlers
 server.use('/api/auth', authRouter);

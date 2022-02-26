@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid, useTheme, Typography, Box, CircularProgress, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
 import StyledLink from '../partials/styled-small-components/styled-link';
 
 import AlignmentContainer from '../../components/partials/containers/alignment-container';

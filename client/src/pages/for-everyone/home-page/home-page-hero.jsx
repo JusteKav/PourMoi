@@ -1,6 +1,7 @@
 import MainGif from '../../../images/home-page-gif.gif';
 import { Button, Grid } from '@mui/material';
 import BackgroundImageContainer from '../../../components/partials/containers/background-image-container';
+import StyledLink from '../../../components/partials/styled-small-components/styled-link';
 
 const Hero = () => {
   return (
@@ -36,9 +37,10 @@ const Hero = () => {
               position: { xs: 'relative', md: 'absolute' },
               left: { xs: 0, md: -105 },
               width: 200,
+              backgroundColor: 'transparent',
             }}
           >
-            SHOP NOW
+            <StyledLink title="SHOP NOW" link="/items" />
           </Button>
         </BackgroundImageContainer>
       </Grid>

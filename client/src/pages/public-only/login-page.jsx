@@ -53,9 +53,9 @@ const LoginPage = () => {
   //   { name: 'email', label: 'Email', type: 'email' },
   //   { name: 'password', label: 'Password', type: 'password' },
   // ];
-  console.log(errors.email);
-  console.log(errors.password);
-  console.log(errors);
+  // console.log(errors.email);
+  // console.log(errors.password);
+  // console.log(errors);
   return (
     <AuthForm
       title="Log in"

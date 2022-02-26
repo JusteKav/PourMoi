@@ -15,6 +15,6 @@ const materialSchema = new mongoose.Schema(
 );
 materialSchema.plugin(uniqueValidator);
 
-const MAterialModel = mongoose.model('Material', materialSchema);
+const MaterialModel = mongoose.model('Material', materialSchema);
 
-module.exports = MAterialModel;
+module.exports = MaterialModel;

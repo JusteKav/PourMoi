@@ -146,7 +146,7 @@ const RegisterPage = () => {
       loading={isSubmitting}
     >
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <TextField
             sx={{ pb: errors.name ? 0 : '17.06px' }}
             name="name"
@@ -161,7 +161,7 @@ const RegisterPage = () => {
             variant="outlined"
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <TextField
             sx={{ pb: errors.surname ? 0 : '17.06px' }}
             name="surname"

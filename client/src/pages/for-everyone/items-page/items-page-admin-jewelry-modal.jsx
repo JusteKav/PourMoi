@@ -1,0 +1,178 @@
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  TextField,
+  Grid,
+  Box,
+  Button,
+  Dialog,
+  Select,
+  MenuItem,
+  InputLabel,
+  Checkbox,
+  ListItemText,
+} from '@mui/material';
+import { useFormik } from 'formik';
+import API from '../../../services/api-service';
+
+const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
+  const initialValues = { ...initialDataValues };
+
+  const [colors, setColors] = useState([]);
+  const [materials, setMaterials] = useState([]);
+  const [types, setTypes] = useState([]);
+  const [stones, setStones] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const fetchedColors = await API.getColors();
+      const fetcheMaterials = await API.getMaterials();
+      const fetchedStones = await API.getStones();
+      const fetchedTypes = await API.getTypes();
+      setColors(fetchedColors.colors);
+      setMaterials(fetcheMaterials);
+      setTypes(fetchedTypes);
+      setStones(fetchedStones);
+    })();
+  }, []);
+
+  const fileUploadRef = useRef(null);
+
+  const onSubmit = async (values) => {
+    const files = Array.from(fileUploadRef.current.files);
+    console.log(files);
+    if (files.length === 0 && initialDataValues.title === '') {
+      throw new Error('Need a file');
+    }
+    const addedJewelery = {
+      ...values,
+      files: files.length !== 0 ? files : oldValues.files,
+    };
+    console.log(addedJewelery);
+    if (initialDataValues.title === '') {
+      await API.addJewelry(addedJewelery);
+    } else {
+      await API.updateJewelry({
+        ...oldValues,
+        ...addedJewelery,
+        files: files.length !== 0 ? [...files, oldValues.files] : oldValues.files,
+      });
+    }
+    handleClose();
+  };
+
+  const { handleChange, handleSubmit, values } = useFormik({
+    initialValues,
+    onSubmit,
+  });
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <Box onClick={handleClickOpen} sx={{ display: 'flex' }}>
+        {icon}
+      </Box>
+      <Dialog open={open} onClose={handleClose}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ width: '600px', p: 4 }}>
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <InputLabel>Title</InputLabel>
+              <TextField name="title" variant="outlined" value={values.title} onChange={handleChange} fullWidth />
+            </Grid>
+            <Grid item xs={12}>
+              <InputLabel>Price</InputLabel>
+              <TextField name="price" variant="outlined" value={values.price} onChange={handleChange} fullWidth />
+            </Grid>
+            <Grid item xs={12}>
+              <InputLabel>Weight</InputLabel>
+              <TextField name="weight" variant="outlined" value={values.weight} onChange={handleChange} fullWidth />
+            </Grid>
+            <Grid item xs={12}>
+              <InputLabel>Color</InputLabel>
+              <Select name="color" fullWidth value={values.color} onChange={handleChange}>
+                {colors.map(({ title, id }) => {
+                  return (
+                    <MenuItem key={id} value={id}>
+                      {title}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </Grid>
+            <Grid item xs={12}>
+              <InputLabel>Material</InputLabel>
+              <Select name="material" fullWidth value={values.material} onChange={handleChange}>
+                {materials.map(({ title, id }) => {
+                  return (
+                    <MenuItem key={id} value={id}>
+                      {title}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </Grid>
+            <Grid item xs={12}>
+              <InputLabel>Type</InputLabel>
+              <Select name="type" fullWidth value={values.type} onChange={handleChange}>
+                {types.map(({ title, id }) => {
+                  return (
+                    <MenuItem key={id} value={id}>
+                      {title}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </Grid>
+            <Grid item xs={12}>
+              <InputLabel>Stones</InputLabel>
+              <Select
+                multiple
+                name="stones"
+                value={values.stones}
+                onChange={handleChange}
+                fullWidth
+                // renderValue={(selected) => selected.join(',')}
+              >
+                {stones.map((stone) => (
+                  <MenuItem key={stone.id} value={stone.id}>
+                    {/* <Checkbox color="secondary" />
+                    <ListItemText primary={stone.title} /> */}
+                    {stone.title}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Grid>
+            <Grid item xs={12}>
+              <InputLabel>Upload photo</InputLabel>
+              <TextField
+                name="files"
+                type="file"
+                inputProps={{ multiple: true }}
+                variant="outlined"
+                value={values.files}
+                onChange={handleChange}
+                fullWidth
+                // accept="image/*"
+                inputRef={fileUploadRef}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button sx={{ my: 2, height: '40px' }} variant="contained" fullWidth type="submit">
+                Submit
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+      </Dialog>
+    </>
+  );
+};
+
+export default AdminJewelryModal;

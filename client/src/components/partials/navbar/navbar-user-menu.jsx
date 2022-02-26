@@ -27,6 +27,7 @@ const UserMenu = () => {
     AuthService.logout();
   };
   const auth = useSelector(authSelector);
+  console.log(auth);
   return (
     <>
       <Box sx={{ width: 72, height: 30, display: { xs: 'none', sm: 'block' } }}></Box>

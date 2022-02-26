@@ -3,7 +3,6 @@ import React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Provider as ReduxProvider } from 'react-redux';
 import { ThemeProvider } from '@mui/material/styles';
-// from folders
 import theme from './styles/theme';
 import store from './store';
 import PageRouter from './routing/page-router';
@@ -23,6 +22,7 @@ const App = () => (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <PageRouter />
+      {/* example for routing without recursion */}
       {/* <Router>
         {checked && (
           <Routes>

@@ -17,6 +17,10 @@ const jewelrySchema = new mongoose.Schema(
       type: 'number',
       required: true,
     },
+    files: {
+      type: Array,
+      required: true,
+    },
     color: {
       type: Schema.Types.ObjectId,
       ref: 'Color',
@@ -29,6 +33,12 @@ const jewelrySchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: 'Type',
     },
+    stones: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Stone',
+      },
+    ],
   },
   {
     timestamps: true,

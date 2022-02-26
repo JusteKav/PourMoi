@@ -72,6 +72,5 @@ module.exports = {
   createColor,
   getColor,
   deleteColor,
-  deleteColor,
   updateColor,
 };
