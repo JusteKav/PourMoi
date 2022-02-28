@@ -1,6 +1,7 @@
+import React, { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { authSelector } from '../../../store/auth';
-import { Grid, Typography, Divider, useTheme, Box, Button } from '@mui/material';
+import { Grid, Typography, Divider, useTheme } from '@mui/material';
 import AlignmentContainer from '../../../components/partials/containers/alignment-container';
 import ItemCard from '../../../components/partials/cards/cards-item-card';
 import SortIcon from '@mui/icons-material/Sort';
@@ -8,20 +9,14 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import ItemsPageSidebar from './items-page-sidebar';
 import FiltersModal from './items-page-filters-modal';
 import AdminJewelryModal from './items-page-admin-jewelry-modal';
-import { useEffect, useState } from 'react';
-import API from '../../../services/api-service';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { JewelryContext } from '../../../contexts/contexts-jewelry-data';
 
 const ItemsPage = () => {
+  const jewelryState = useContext(JewelryContext);
+
   const theme = useTheme();
   const auth = useSelector(authSelector);
-
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    API.getJewelries().then((res) => {
-      setData(res.jewelry);
-    });
-  }, []);
 
   return (
     <AlignmentContainer
@@ -82,7 +77,7 @@ const ItemsPage = () => {
             <Typography sx={{ mx: 1 }}> Add Jewelry</Typography>
           </Grid>
         ) : null}
-        {data.map((jewelry) => {
+        {jewelryState.data.map((jewelry) => {
           return (
             <Grid item xs={6} md={4} lg={3} key={jewelry.id}>
               <ItemCard jewelry={jewelry} />

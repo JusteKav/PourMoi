@@ -10,6 +10,6 @@ router.use(authMiddleware);
 
 router.get('/', adminMiddleware, getUsers);
 
-router.patch('/', updateUser);
+router.patch('/:id', updateUser);
 
 module.exports = router;

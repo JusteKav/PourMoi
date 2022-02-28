@@ -1,21 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import {
-  TextField,
-  Grid,
-  Box,
-  Button,
-  Dialog,
-  Select,
-  MenuItem,
-  InputLabel,
-  Checkbox,
-  ListItemText,
-} from '@mui/material';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { TextField, Grid, Box, Button, Dialog, Select, MenuItem, InputLabel } from '@mui/material';
 import { useFormik } from 'formik';
 import API from '../../../services/api-service';
+import { JewelryContext } from '../../../contexts/contexts-jewelry-data';
 
 const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
   const initialValues = { ...initialDataValues };
+  const jewelryState = useContext(JewelryContext);
 
   const [colors, setColors] = useState([]);
   const [materials, setMaterials] = useState([]);
@@ -37,9 +28,8 @@ const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
 
   const fileUploadRef = useRef(null);
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, { resetForm }) => {
     const files = Array.from(fileUploadRef.current.files);
-    console.log(files);
     if (files.length === 0 && initialDataValues.title === '') {
       throw new Error('Need a file');
     }
@@ -47,16 +37,17 @@ const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
       ...values,
       files: files.length !== 0 ? files : oldValues.files,
     };
-    console.log(addedJewelery);
     if (initialDataValues.title === '') {
       await API.addJewelry(addedJewelery);
+      resetForm({ values: '' });
     } else {
       await API.updateJewelry({
         ...oldValues,
         ...addedJewelery,
-        files: files.length !== 0 ? [...files, oldValues.files] : oldValues.files,
+        files: files.length !== 0 ? [...files, ...oldValues.files] : oldValues.files,
       });
     }
+    jewelryState.getData();
     handleClose();
   };
 

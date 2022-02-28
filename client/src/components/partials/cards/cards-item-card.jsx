@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { authSelector } from '../../../store/auth';
 import { Typography, Box, Card, CardMedia } from '@mui/material';
@@ -7,13 +8,16 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import UpdateIcon from '@mui/icons-material/Update';
 import API from '../../../services/api-service';
 import AdminPopupDashboard from '../../../pages/for-everyone/items-page/items-page-admin-jewelry-modal';
+import { JewelryContext } from '../../../contexts/contexts-jewelry-data';
 
 const ItemCard = ({ jewelry }) => {
   const { files, title, material, price, weight, color, type, stones } = jewelry;
   const auth = useSelector(authSelector);
+  const jewelryState = useContext(JewelryContext);
 
-  const handleDelete = () => {
-    API.deleteJewelry(jewelry);
+  const handleDelete = async () => {
+    await API.deleteJewelry(jewelry);
+    await jewelryState.getData();
   };
   return (
     <Card sx={{ width: '100%', height: '100%', position: 'relative', p: 0 }}>

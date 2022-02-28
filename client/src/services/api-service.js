@@ -10,7 +10,7 @@ const instance = axios.create({
 const getJewelries = async () => {
   try {
     const response = await instance.get('/jewelries');
-    return response.data;
+    return response.data.jewelry;
   } catch (error) {
     throw new Error(error);
   }
@@ -66,8 +66,14 @@ const updateJewelry = async (jewelry) => {
 };
 
 const deleteJewelry = async (jewelry) => {
-  const response = await instance.delete(`/jewelries/${jewelry.id}`);
-  return response.data;
+  // const response = await instance.delete(`/jewelries/${jewelry.id}`);
+  // return response.data.jewelry;
+  try {
+    const response = await instance.delete(`/jewelries/${jewelry.id}`);
+    return response.data.jewelry;
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 const getStones = async () => {
@@ -106,6 +112,17 @@ const getColors = async () => {
   }
 };
 
+const updateUser = async (user) => {
+  try {
+    const response = await instance.patch(`/api/users/${user.id}`, user);
+    console.log('------------');
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 // const deleteColor = async (color) => {
 //   const response = await instance.delete(`/colors/${color.id}`);
 //   return response.data;
@@ -121,6 +138,7 @@ const API = {
   getTypes,
   getColors,
   // deleteColor,
+  updateUser,
 };
 
 export default API;

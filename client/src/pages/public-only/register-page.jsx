@@ -26,7 +26,7 @@ const validationSchema = yup.object({
   password: yup
     .string()
     .required('Is required')
-    .min(6, 'At least 6 symbols')
+    .min(8, 'At least 8 symbols')
     .max(32, 'Most 32 symbols')
     .matches(/^.*[A-ZĄČĘĖĮŠŲŪŽ]+.*$/, 'Atleast one capital letter')
     .matches(/^.*\d+.*$/, 'Atleast one number'),
