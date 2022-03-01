@@ -58,24 +58,26 @@ const ItemsPage = () => {
         </Grid>
       </Grid>
       <Grid container spacing={2}>
-        {auth.user.role === 'ADMIN' ? (
-          <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
-            <AdminJewelryModal
-              icon={<AddCircleIcon />}
-              initialDataValues={{
-                title: '',
-                price: '',
-                weight: '',
-                color: '',
-                material: '',
-                type: '',
-                stones: [],
-                files: [],
-              }}
-              sx={{ display: 'block' }}
-            />
-            <Typography sx={{ mx: 1 }}> Add Jewelry</Typography>
-          </Grid>
+        {auth.user !== null ? (
+          auth.user.role === 'ADMIN' ? (
+            <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+              <AdminJewelryModal
+                icon={<AddCircleIcon />}
+                initialDataValues={{
+                  title: '',
+                  price: '',
+                  weight: '',
+                  color: '',
+                  material: '',
+                  type: '',
+                  stones: [],
+                  files: [],
+                }}
+                sx={{ display: 'block' }}
+              />
+              <Typography sx={{ mx: 1 }}> Add Jewelry</Typography>
+            </Grid>
+          ) : null
         ) : null}
         {jewelryState.data.map((jewelry) => {
           return (

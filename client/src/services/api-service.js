@@ -1,4 +1,7 @@
 import axios from 'axios';
+import store from '../store';
+import { updateUser } from '../store/auth';
+import validateToken from './service-helpers';
 
 const instance = axios.create({
   baseURL: 'http://localhost:5070',
@@ -112,21 +115,15 @@ const getColors = async () => {
   }
 };
 
-const updateUser = async (user) => {
-  try {
-    const response = await instance.patch(`/api/users/${user.id}`, user);
-    console.log('------------');
-    console.log(response);
-    return response.data;
-  } catch (error) {
-    throw new Error(error);
-  }
+const updateUserData = async (user) => {
+  const token = validateToken();
+  await instance.patch(`/api/users/${user.id}`, user, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  store.dispatch(updateUser({ user: user }));
 };
-
-// const deleteColor = async (color) => {
-//   const response = await instance.delete(`/colors/${color.id}`);
-//   return response.data;
-// };
 
 const API = {
   getJewelries,
@@ -138,7 +135,7 @@ const API = {
   getTypes,
   getColors,
   // deleteColor,
-  updateUser,
+  updateUserData,
 };
 
 export default API;

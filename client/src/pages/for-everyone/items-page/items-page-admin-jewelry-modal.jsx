@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useRef, useContext } from 'react';
 import { TextField, Grid, Box, Button, Dialog, Select, MenuItem, InputLabel } from '@mui/material';
 import { useFormik } from 'formik';
 import API from '../../../services/api-service';
@@ -7,24 +7,6 @@ import { JewelryContext } from '../../../contexts/contexts-jewelry-data';
 const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
   const initialValues = { ...initialDataValues };
   const jewelryState = useContext(JewelryContext);
-
-  const [colors, setColors] = useState([]);
-  const [materials, setMaterials] = useState([]);
-  const [types, setTypes] = useState([]);
-  const [stones, setStones] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const fetchedColors = await API.getColors();
-      const fetcheMaterials = await API.getMaterials();
-      const fetchedStones = await API.getStones();
-      const fetchedTypes = await API.getTypes();
-      setColors(fetchedColors.colors);
-      setMaterials(fetcheMaterials);
-      setTypes(fetchedTypes);
-      setStones(fetchedStones);
-    })();
-  }, []);
 
   const fileUploadRef = useRef(null);
 
@@ -88,7 +70,7 @@ const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
             <Grid item xs={12}>
               <InputLabel>Color</InputLabel>
               <Select name="color" fullWidth value={values.color} onChange={handleChange}>
-                {colors.map(({ title, id }) => {
+                {jewelryState.colors.map(({ title, id }) => {
                   return (
                     <MenuItem key={id} value={id}>
                       {title}
@@ -100,7 +82,7 @@ const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
             <Grid item xs={12}>
               <InputLabel>Material</InputLabel>
               <Select name="material" fullWidth value={values.material} onChange={handleChange}>
-                {materials.map(({ title, id }) => {
+                {jewelryState.materials.map(({ title, id }) => {
                   return (
                     <MenuItem key={id} value={id}>
                       {title}
@@ -112,7 +94,7 @@ const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
             <Grid item xs={12}>
               <InputLabel>Type</InputLabel>
               <Select name="type" fullWidth value={values.type} onChange={handleChange}>
-                {types.map(({ title, id }) => {
+                {jewelryState.types.map(({ title, id }) => {
                   return (
                     <MenuItem key={id} value={id}>
                       {title}
@@ -131,7 +113,7 @@ const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
                 fullWidth
                 // renderValue={(selected) => selected.join(',')}
               >
-                {stones.map((stone) => (
+                {jewelryState.stones.map((stone) => (
                   <MenuItem key={stone.id} value={stone.id}>
                     {/* <Checkbox color="secondary" />
                     <ListItemText primary={stone.title} /> */}

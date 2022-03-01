@@ -17,7 +17,7 @@ const mapRoutesRecursive = ({ path, index, pageName, childRoutes, auth }) => {
     );
   }
   // Route Protection
-  const authenticatedPage = protectPageEnum[auth] ? protectPageEnum[auth](Page) : <Page />;
+  const authenticatedPage = auth ? protectPageEnum[auth](Page) : <Page />;
 
   return <Route key={pageName} path={path} index={index} element={authenticatedPage} />;
 };
@@ -29,7 +29,7 @@ const PageRouter = () => {
 
   return (
     <BrowserRouter>
-      <Routes>{loggedIn !== null ? routes : null}</Routes>
+      <Routes>{routes}</Routes>
     </BrowserRouter>
   );
 };

@@ -7,9 +7,10 @@ import routes from '../routes';
 const UserProtector = ({ children }) => {
   const { pathname } = useLocation();
   const auth = useSelector(authSelector);
+  console.log(auth);
 
   if (!auth.loggedIn) {
-    return <Navigate to={`${routes.LoginPage}?redirectTo=${pathname}`} />;
+    return <Navigate to={routes.LoginPage} />;
   }
 
   if (auth.user.role !== 'USER') {

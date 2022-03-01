@@ -26,30 +26,32 @@ const ItemCard = ({ jewelry }) => {
         <Typography sx={{ fontWeight: 500 }}>{title}</Typography>
         <Typography sx={{ display: { xs: 'none', sm: 'block' } }}>{material.title}</Typography>
         <Typography>€{price}</Typography>
-        {auth.user.role === 'ADMIN' ? (
-          <Box sx={{ position: 'absolute', display: 'flex', right: 10, bottom: 6 }}>
-            <DeleteForeverIcon onClick={handleDelete} />
-            <AdminPopupDashboard
-              oldValues={jewelry}
-              icon={<UpdateIcon />}
-              initialDataValues={{
-                title: title,
-                price: price,
-                weight: weight,
-                color: color.id,
-                material: material.id,
-                type: type.id,
-                stones: stones.map((el) => el.id),
-                files: [],
-              }}
-            />
-          </Box>
-        ) : (
-          <Box sx={{ position: 'absolute', right: 10, bottom: 6 }}>
-            <FavoriteBorderOutlinedIcon />
-            <ShoppingCartOutlinedIcon />
-          </Box>
-        )}
+        {auth.user !== null ? (
+          auth.user.role === 'ADMIN' ? (
+            <Box sx={{ position: 'absolute', display: 'flex', right: 10, bottom: 6 }}>
+              <DeleteForeverIcon onClick={handleDelete} />
+              <AdminPopupDashboard
+                oldValues={jewelry}
+                icon={<UpdateIcon />}
+                initialDataValues={{
+                  title: title,
+                  price: price,
+                  weight: weight,
+                  color: color.id,
+                  material: material.id,
+                  type: type.id,
+                  stones: stones.map((el) => el.id),
+                  files: [],
+                }}
+              />
+            </Box>
+          ) : (
+            <Box sx={{ position: 'absolute', right: 10, bottom: 6 }}>
+              <FavoriteBorderOutlinedIcon />
+              <ShoppingCartOutlinedIcon />
+            </Box>
+          )
+        ) : null}
       </Box>
     </Card>
   );

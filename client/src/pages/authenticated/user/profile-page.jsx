@@ -17,8 +17,7 @@ const ProfilePage = () => {
 
   const onSubmit = (values) => {
     const userValues = { ...user, ...values };
-    console.log(userValues);
-    API.updateUser(userValues);
+    API.updateUserData(userValues);
   };
 
   const { handleChange, handleSubmit, values } = useFormik({

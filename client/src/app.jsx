@@ -19,5 +19,4 @@ const App = () => {
     </ReduxProvider>
   );
 };
-
 export default App;

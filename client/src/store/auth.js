@@ -24,6 +24,7 @@ const authSlice = createSlice({
       state.redirectTo = null;
     },
     updateUser(state, { payload }) {
+      state.loggedIn = true;
       state.user = payload.user;
     },
   },

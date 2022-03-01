@@ -29,6 +29,5 @@ const mapRoutePathsRecursive = (paths, { path, index, pageName, childRoutes }) =
 };
 
 const routes = routeStructure.reduce(mapRoutePathsRecursive, {});
-console.log(routes);
 
 export default routes;

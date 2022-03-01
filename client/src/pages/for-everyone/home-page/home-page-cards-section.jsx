@@ -1,8 +1,8 @@
 import ItemCard from '../../../components/partials/cards/cards-item-card';
 import { Grid } from '@mui/material';
 import AlignmentContainer from '../../../components/partials/containers/alignment-container';
-import API from '../../../services/api-service';
-import React, { useState, useEffect } from 'react';
+import { JewelryContext } from '../../../contexts/contexts-jewelry-data';
+import React, { useContext } from 'react';
 
 // const homePageCardData = [
 //   {
@@ -38,18 +38,12 @@ import React, { useState, useEffect } from 'react';
 // ];
 
 const HomePageCardsSection = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    API.getJewelries().then((res) => {
-      const firstFourItems = [res.jewelry[0], res.jewelry[1], res.jewelry[2], res.jewelry[3]];
-      setData(firstFourItems);
-    });
-  }, []);
+  const jewelryState = useContext(JewelryContext);
 
   return (
     <AlignmentContainer color="#faf8f8" sx={{ py: 7 }}>
       <Grid container spacing={2} sx={{ display: 'flex', flexWrap: 'wrap' }}>
-        {data.map((jewelry) => {
+        {jewelryState.data.map((jewelry) => {
           return (
             <Grid item xs={6} md={3} key={jewelry.id}>
               <ItemCard jewelry={jewelry} />
