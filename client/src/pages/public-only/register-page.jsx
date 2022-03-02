@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Grid, InputAdornment, CircularProgress } from '@mui/material';
+import { TextField, Grid, InputAdornment, CircularProgress, InputLabel } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
 import { useDispatch } from 'react-redux';
@@ -11,13 +11,21 @@ import AuthService from '../../services/auth-service';
 import routes from '../../routing/routes';
 
 const validationSchema = yup.object({
-  name: yup.string().required('Is required').min(2, 'At least 2 letters').max(32, 'Most 32 letters'),
-  surname: yup.string().required('Is required').min(2, 'At least 2 letters').max(32, 'Most 32 letters'),
+  name: yup
+    .string()
+    .required('Name is required')
+    .min(2, 'Name must be at least 2 letters')
+    .max(32, 'Name must be less than 24 letters'),
+  surname: yup
+    .string()
+    .required('Surname is required')
+    .min(2, 'Surname must be at least 2 letters')
+    .max(32, 'Surname must be less than 24 letters'),
   email: yup
     .string()
-    .required('Is required')
-    .email('Is not valid email')
-    .test('email-validator', 'Email unavailable', (_, context) => {
+    .required('Email is required')
+    .email('Email is not valid')
+    .test('email-validator', 'Email already exists', (_, context) => {
       const { emailChecked, emailAvailable } = context.parent;
       if (!emailChecked) return true;
 
@@ -25,14 +33,14 @@ const validationSchema = yup.object({
     }),
   password: yup
     .string()
-    .required('Is required')
-    .min(8, 'At least 8 symbols')
-    .max(32, 'Most 32 symbols')
-    .matches(/^.*[A-ZĄČĘĖĮŠŲŪŽ]+.*$/, 'Atleast one capital letter')
-    .matches(/^.*\d+.*$/, 'Atleast one number'),
+    .required('Password is required')
+    .matches(/^.*[A-ZĄČĘĖĮŠŲŪŽ]+.*$/, 'Password must have at least one capital letter')
+    .matches(/^.*\d+.*$/, 'Password must have at least one number')
+    .min(8, 'Password must be at least 8 symbols')
+    .max(32, 'Password must be less than 32 symbols'),
   passwordConfirmation: yup
     .string()
-    .required('Is required')
+    .required('Password confirmation is required')
     .oneOf([yup.ref('password')], 'Passwords must match'),
   emailChecked: yup.boolean().oneOf([true]),
   emailAvailable: yup.boolean().oneOf([true]),
@@ -49,13 +57,6 @@ const initialValues = {
   emailAvailable: false,
 };
 
-// const inputsData = [
-//   { name: 'name', label: 'Name', type: 'text' },
-//   { name: 'surname', label: 'Surname', type: 'text' },
-//   { name: 'password', label: 'Password', type: 'password' },
-//   { name: 'passwordConfirmation', label: 'Password Confirmation', type: 'password' },
-// ];
-
 const RegisterPage = () => {
   const dispatch = useDispatch();
   const [emailCheckLoading, setEmailCheckLoading] = useState(false);
@@ -68,7 +69,6 @@ const RegisterPage = () => {
       password,
       repeatPassword: passwordConfirmation,
     });
-    console.log('iskviesta');
     dispatch(login({ user }));
   };
 
@@ -146,31 +146,35 @@ const RegisterPage = () => {
       loading={isSubmitting}
     >
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid item xs={6} sx={{ mt: 3 }}>
+          {errors.name && touched.name ? (
+            <InputLabel sx={{ color: 'red' }}>{errors.name}</InputLabel>
+          ) : (
+            <InputLabel>Name</InputLabel>
+          )}
           <TextField
-            sx={{ pb: errors.name ? 0 : '17.06px' }}
             name="name"
-            label="Vardas"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.name}
             error={touched.name && Boolean(errors.name)}
-            helperText={touched.name && errors.name}
             disabled={isSubmitting}
             fullWidth
             variant="outlined"
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={6} sx={{ mt: 3 }}>
+          {errors.surname && touched.surname ? (
+            <InputLabel sx={{ color: 'red' }}>{errors.surname}</InputLabel>
+          ) : (
+            <InputLabel>Surname</InputLabel>
+          )}
           <TextField
-            sx={{ pb: errors.surname ? 0 : '17.06px' }}
             name="surname"
-            label="Pavardė"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.surname}
             error={touched.surname && Boolean(errors.surname)}
-            helperText={touched.surname && errors.surname}
             disabled={isSubmitting}
             fullWidth
             variant="outlined"
@@ -178,15 +182,17 @@ const RegisterPage = () => {
         </Grid>
 
         <Grid item xs={12}>
+          {errors.email && touched.email ? (
+            <InputLabel sx={{ color: 'red' }}>{errors.email}</InputLabel>
+          ) : (
+            <InputLabel>Email</InputLabel>
+          )}
           <TextField
-            sx={{ pb: errors.email ? 0 : '17.06px' }}
             name="email"
-            label="El. paštas"
             onChange={handleEmailChange}
             onBlur={handleEmailBlur}
             value={values.email}
             error={touched.email && Boolean(errors.email)}
-            helperText={touched.email && errors.email}
             disabled={isSubmitting}
             fullWidth
             variant="outlined"
@@ -196,15 +202,17 @@ const RegisterPage = () => {
           />
         </Grid>
         <Grid item xs={12}>
+          {errors.password && touched.password ? (
+            <InputLabel sx={{ color: 'red' }}>{errors.password}</InputLabel>
+          ) : (
+            <InputLabel>Password</InputLabel>
+          )}
           <TextField
-            sx={{ pb: errors.password ? 0 : '17.06px' }}
             name="password"
-            label="Slaptažodis"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.password}
             error={touched.password && Boolean(errors.password)}
-            helperText={touched.password && errors.password}
             disabled={isSubmitting}
             fullWidth
             variant="outlined"
@@ -212,15 +220,17 @@ const RegisterPage = () => {
           />
         </Grid>
         <Grid item xs={12}>
+          {errors.passwordConfirmation && touched.passwordConfirmation ? (
+            <InputLabel sx={{ color: 'red' }}>{errors.passwordConfirmation}</InputLabel>
+          ) : (
+            <InputLabel>Repeat password</InputLabel>
+          )}
           <TextField
-            sx={{ pb: errors.passwordConfirmation ? 0 : '17.06px' }}
             name="passwordConfirmation"
-            label="Slaptažodžio pakartojimas"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.passwordConfirmation}
             error={touched.passwordConfirmation && Boolean(errors.passwordConfirmation)}
-            helperText={touched.passwordConfirmation && errors.passwordConfirmation}
             disabled={isSubmitting}
             fullWidth
             variant="outlined"

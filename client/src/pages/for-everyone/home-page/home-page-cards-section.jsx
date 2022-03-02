@@ -41,8 +41,8 @@ const HomePageCardsSection = () => {
   const jewelryState = useContext(JewelryContext);
 
   return (
-    <AlignmentContainer color="#faf8f8" sx={{ py: 7 }}>
-      <Grid container spacing={2} sx={{ display: 'flex', flexWrap: 'wrap' }}>
+    <AlignmentContainer color="#faf8f8" sx={{ py: 8 }}>
+      <Grid container spacing={3} sx={{ display: 'flex', flexWrap: 'wrap' }}>
         {jewelryState.data.map((jewelry) => {
           return (
             <Grid item xs={6} md={3} key={jewelry.id}>

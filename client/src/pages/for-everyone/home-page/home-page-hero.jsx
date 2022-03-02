@@ -5,25 +5,25 @@ import StyledLink from '../../../components/partials/styled-small-components/sty
 
 const Hero = () => {
   return (
-    <Grid container>
+    <Grid container sx={{ mb: { xs: 6, md: 8 } }}>
       <Grid item md={8}>
         <BackgroundImageContainer
-          sx={{ height: { xs: '40vh', md: '75vh' }, backgroundPosition: '50% 25%' }}
-          image={`url(${MainGif})`}
+          sx={{ height: { xs: '70vh', md: '75vh' }, backgroundPosition: '50% 35%' }}
+          image={`url(https://cdn.shopify.com/s/files/1/2803/4000/t/223/assets/EDIT_APRIL_08.jpg?v=12297639666601562275)`}
         />
       </Grid>
       <Grid item xs={12} md={4}>
         <BackgroundImageContainer
           sx={{
-            backgroundSize: { xs: 'cover', md: 'unset' },
+            backgroundSize: { xs: 'cover' },
             alignItems: { xs: 'end', md: 'center' },
             backgroundPosition: { xs: '0% 70%', md: 'center' },
             position: ' relative',
-            py: 8,
+            py: 3,
           }}
           image={{
-            xs: `url(https://cdn.shopify.com/s/files/1/2803/4000/t/193/assets/WE_ARE_001.jpg?v=4282297815789512859)`,
-            md: `url('https://cdn.shopify.com/s/files/1/2803/4000/products/1-CO01-260-U_7_700x.jpg?v=1628731500')`,
+            xs: `url(https://cdn.shopify.com/s/files/1/2803/4000/t/223/assets/EDIT_JUNE_03.jpg.jpg?v=5743875366788461305)`,
+            md: `url('https://cdn.shopify.com/s/files/1/2803/4000/products/CO01-275-U_3_600x.jpg?v=1628732318')`,
           }}
         >
           <Button
@@ -31,16 +31,26 @@ const Hero = () => {
               border: 1,
               borderRadius: 0,
               color: { xs: 'white', md: 'black' },
-              fontSize: { xs: 12, md: 16 },
-              px: { xs: 3, md: 5 },
-              py: { xs: 2, md: 3 },
+              fontSize: { xs: 12, md: 36 },
+              px: { xs: 3, md: 2, lg: 3 },
+              py: { xs: 2, md: 2, lg: 3 },
               position: { xs: 'relative', md: 'absolute' },
-              left: { xs: 0, md: -105 },
-              width: 200,
+              mx: { xs: 2, md: 0 },
+              left: { xs: 0, md: -107, lg: -147 },
               backgroundColor: 'transparent',
+              '&:hover': {
+                backgroundColor: 'rgba(250,248,248, 0.2)',
+                color: '#ffffff',
+              },
+              width: { xs: '100%', md: '210px', lg: '282px' },
             }}
           >
-            <StyledLink title="SHOP NOW" link="/items" />
+            <StyledLink sx={{ fontSize: { xs: 24, md: 32, lg: 44 }, color: '#f6f4f0' }} title="SHOP" link="/items" />
+            <StyledLink
+              sx={{ fontSize: { xs: 24, md: 32, lg: 44 }, color: { xs: '#f6f4f0', md: 'black' }, p: 1 }}
+              title="NOW"
+              link="/items"
+            />
           </Button>
         </BackgroundImageContainer>
       </Grid>

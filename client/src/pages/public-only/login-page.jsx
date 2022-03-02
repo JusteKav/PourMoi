@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Grid, Alert } from '@mui/material';
+import { TextField, Grid, Alert, InputLabel, styled } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
@@ -10,8 +10,8 @@ import AuthForm from '../../components/auth-form';
 import AuthService from '../../services/auth-service';
 
 const validationSchema = yup.object({
-  email: yup.string().required('Is requireda').email('Is not valid email'),
-  password: yup.string().required('Is required'),
+  email: yup.string().required('Email is required').email('Email is not valid'),
+  password: yup.string().required('Password is required'),
 });
 
 const initialValues = {
@@ -49,13 +49,6 @@ const LoginPage = () => {
     onSubmit,
   });
 
-  // const inputData = [
-  //   { name: 'email', label: 'Email', type: 'email' },
-  //   { name: 'password', label: 'Password', type: 'password' },
-  // ];
-  // console.log(errors.email);
-  // console.log(errors.password);
-  // console.log(errors);
   return (
     <AuthForm
       title="Log in"
@@ -65,38 +58,42 @@ const LoginPage = () => {
       isValid={isValid && dirty}
       onSubmit={handleSubmit}
     >
-      <Alert severity="error" sx={{ my: 2, visibility: error ? 'visible' : 'hidden' }}>
+      <Alert severity="error" sx={{ visibility: error ? 'visible' : 'hidden', my: 1 }}>
         {error}
       </Alert>
-      <Grid container spacing={1}>
+      <Grid container spacing={2}>
         <Grid item xs={12}>
+          {errors.email && touched.email ? (
+            <InputLabel sx={{ color: 'red' }}>{errors.email}</InputLabel>
+          ) : (
+            <InputLabel>Email</InputLabel>
+          )}
           <TextField
             name="email"
-            variant="outlined"
-            label="Email"
+            // variant="standart"
+            // color="warning"
             value={values.email}
             error={touched.email && Boolean(errors.email)}
-            helperText={'' || (touched.email && errors.email)}
             onChange={handleChange}
             onBlur={handleBlur}
             fullWidth
-            // autoComplete="email"
-            // sx={{ pb: Boolean(errors.email) ? 0 : '20.07px' }}
           />
         </Grid>
         <Grid item xs={12}>
+          {errors.password && touched.password ? (
+            <InputLabel sx={{ color: 'red' }}>{errors.password}</InputLabel>
+          ) : (
+            <InputLabel>Password</InputLabel>
+          )}
           <TextField
             name="password"
+            type="password"
             variant="outlined"
-            label="Password"
             value={values.password}
             error={touched.password && Boolean(errors.password)}
-            helperText={touched.password && errors.password}
             onChange={handleChange}
             onBlur={handleBlur}
             fullWidth
-            // autoComplete="current-password"
-            sx={{ pb: Boolean(errors.password) ? 0 : '20.07px' }}
           />
         </Grid>
       </Grid>

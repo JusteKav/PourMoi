@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 
 const AlignmentContainer = ({ children, sx, color }) => {
   return (
-    <Box sx={{ backgroundColor: color, height: '100%' }}>
+    <Box sx={{ backgroundColor: color, height: '100%', width: '100%' }}>
       <Box
         sx={{
           maxWidth: 'lg',
@@ -11,6 +11,7 @@ const AlignmentContainer = ({ children, sx, color }) => {
           justifyContent: 'center',
           alignItems: 'center',
           height: '100%',
+          width: '100%',
           p: 2,
           ...sx,
         }}

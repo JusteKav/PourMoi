@@ -58,7 +58,14 @@ const ProfilePage = () => {
           </Grid>
           <Grid item xs={12}>
             <InputLabel>Email</InputLabel>
-            <TextField name="email" variant="outlined" value={values.email} onChange={handleChange} fullWidth />
+            <TextField
+              disabled
+              name="email"
+              variant="outlined"
+              value={values.email}
+              onChange={handleChange}
+              fullWidth
+            />
           </Grid>
           <Grid item xs={12}>
             <Button sx={{ my: 2, height: '40px' }} variant="contained" fullWidth type="submit">

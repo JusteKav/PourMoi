@@ -11,6 +11,13 @@ export const theme = createTheme({
   },
   components: {
     MuiButton: {
+      MuiButtonBase: {
+        styleOverrides: {
+          root: {
+            disableRipple: true,
+          },
+        },
+      },
       styleOverrides: {
         root: {
           backgroundColor: '#000000',
@@ -22,7 +29,34 @@ export const theme = createTheme({
         },
       },
     },
+    MuiSelect: {
+      styleOverrides: {
+        root: {},
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          // '& .MuiOutlinedInput-root': {
+          //   '& fieldset': {
+          //     borderColor: 'black',
+          //   },
+          //   '&:hover fieldset': {
+          //     borderColor: 'white',
+          //   },
+          // },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: 'black',
+        },
+      },
+    },
   },
+
   palette: {
     primary: {
       main: '#ffffff',

@@ -7,7 +7,6 @@ const jewelrySchema = new mongoose.Schema(
     title: {
       type: 'string',
       required: true,
-      unique: true,
     },
     price: {
       type: 'number',
