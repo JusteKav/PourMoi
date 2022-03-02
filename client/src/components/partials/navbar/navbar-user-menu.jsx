@@ -62,11 +62,17 @@ const UserMenu = () => {
               <StyledBox>
                 <StyledLink handleFunction={handleClose} title="Log in" link="/login" />
                 <Divider sx={{ width: '90%' }} />
-                <StyledLink handleFunction={handleClose} title="Sign in" link="/register" />
+                <StyledLink handleFunction={handleClose} title="Sign up" link="/register" />
+              </StyledBox>
+            ) : auth.user.role === 'USER' ? (
+              <StyledBox>
+                <StyledLink handleFunction={handleClose} title="Profile" link="/profile" />
+                <Divider sx={{ width: '90%' }} />
+                <StyledLink handleFunction={handleLogout} title="Log out" link="/" />
               </StyledBox>
             ) : (
               <StyledBox>
-                <StyledLink handleFunction={handleClose} title="Profile" link="/profile" />
+                <StyledLink handleFunction={handleClose} title="Edit collections" link="/data-edit" />
                 <Divider sx={{ width: '90%' }} />
                 <StyledLink handleFunction={handleLogout} title="Log out" link="/" />
               </StyledBox>

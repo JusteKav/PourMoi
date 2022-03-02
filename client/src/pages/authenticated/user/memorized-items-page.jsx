@@ -1,5 +1,7 @@
+import { Box } from '@mui/material';
+
 const MemorizedItemsPage = () => {
-  return <div>Memorized items page</div>;
+  return <Box> Memorized</Box>;
 };
 
 export default MemorizedItemsPage;

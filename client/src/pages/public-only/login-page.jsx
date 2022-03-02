@@ -70,8 +70,6 @@ const LoginPage = () => {
           )}
           <TextField
             name="email"
-            // variant="standart"
-            // color="warning"
             value={values.email}
             error={touched.email && Boolean(errors.email)}
             onChange={handleChange}

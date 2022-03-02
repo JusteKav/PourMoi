@@ -1,4 +1,4 @@
-import { PUBLIC_ONLY, USER } from './auth-types';
+import { PUBLIC_ONLY, USER, ADMIN } from './auth-types';
 
 const routeStructure = [
   {
@@ -11,6 +11,7 @@ const routeStructure = [
       { path: 'memorized-items', pageName: 'MemorizedItemsPage', auth: USER },
       { path: 'order', pageName: 'OrderPage', auth: USER },
       { path: 'profile', pageName: 'ProfilePage', auth: USER },
+      { path: 'data-edit', pageName: 'DataEditPage', auth: ADMIN },
       { path: '*', pageName: 'ErrorPage' },
       {
         path: '/',

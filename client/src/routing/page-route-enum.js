@@ -14,6 +14,7 @@ import ProfilePage from '../pages/authenticated/user/profile-page';
 import MemorizedItemsPage from '../pages/authenticated/user/memorized-items-page';
 import OrderPage from '../pages/authenticated/user/order-page';
 // admin
+import DataEditPage from '../pages/authenticated/admin/data-edit-page';
 
 const exportedObject = {
   HomePage,
@@ -27,6 +28,7 @@ const exportedObject = {
   ErrorPage,
   NavbarAndFooterLayout,
   ViewportLayout,
+  DataEditPage,
 };
 
 export default exportedObject;

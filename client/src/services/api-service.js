@@ -109,6 +109,33 @@ const getTypes = async () => {
 const getColors = async () => {
   try {
     const response = await instance.get('/colors');
+    return response.data.colors;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const addColor = async (color) => {
+  try {
+    const response = await instance.post('/colors', color);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const deleteColor = async (color) => {
+  try {
+    const response = await instance.delete(`/colors/${color.id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const updateColor = async (color) => {
+  try {
+    const response = await instance.patch(`/colors/${color.id}`, color);
     return response.data;
   } catch (error) {
     throw new Error(error);
@@ -125,6 +152,15 @@ const updateUserData = async (user) => {
   store.dispatch(updateUser({ user: user }));
 };
 
+// const checkColor = async (title) => {
+//   try {
+//     const { data } = await instance.get(`/check-color?color=${title}`);
+//     return data.available;
+//   } catch (error) {
+//     return error.message;
+//   }
+// };
+
 const API = {
   getJewelries,
   addJewelry,
@@ -134,8 +170,11 @@ const API = {
   getMaterials,
   getTypes,
   getColors,
-  // deleteColor,
+  deleteColor,
+  addColor,
   updateUserData,
+  updateColor,
+  // checkColor,
 };
 
 export default API;

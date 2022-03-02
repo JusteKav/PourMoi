@@ -18,7 +18,7 @@ export const useProducts = () => {
     const fetchedStones = await API.getStones();
     const fetchedTypes = await API.getTypes();
     setData(fetchedProducts);
-    setColors(fetchedColors.colors);
+    setColors(fetchedColors);
     setMaterials(fetcheMaterials);
     setTypes(fetchedTypes);
     setStones(fetchedStones);
@@ -26,7 +26,7 @@ export const useProducts = () => {
 
   useEffect(() => {
     getData();
-  }, [data.length]);
+  }, [data.length, colors.length, materials.length, types.length, stones.length]);
 
   const jewelryState = useMemo(
     () => ({ data, setData, getData, colors, materials, types, stones }),

@@ -67,10 +67,23 @@ const updateColor = async (req, res) => {
   }
 };
 
+// const checkColor = async (req, res) => {
+//   const { title } = req.query;
+//   if (!title) {
+//     res.status(400).json({
+//       message: 'No email provided',
+//     });
+//     return;
+//   }
+//   const colorDoc = await ColorModel.findOne({ title });
+//   res.status(200).json({ available: !colorDoc });
+// };
+
 module.exports = {
   getColors,
   createColor,
   getColor,
   deleteColor,
   updateColor,
+  // checkColor,
 };
