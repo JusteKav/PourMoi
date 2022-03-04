@@ -1,4 +1,4 @@
-import { Typography, Box, useTheme } from '@mui/material';
+import { Typography, Box, Modal } from '@mui/material';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
@@ -13,16 +13,9 @@ const links = [
 ];
 
 const ShopMenu = () => {
-  const theme = useTheme();
-  const [menuDisplay, setMenuDisplay] = useState('none');
-
-  const handleMenuDisplay = () => {
-    if (menuDisplay === 'none') {
-      setMenuDisplay('block');
-    } else {
-      setMenuDisplay('none');
-    }
-  };
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <Box
@@ -35,42 +28,70 @@ const ShopMenu = () => {
         height: '90%',
       }}
     >
-      <Box
+      {links.map(({ id, title, link }) => (
+        <Typography
+          onClick={handleClose}
+          variant="boldTextXs"
+          sx={{
+            display: { xs: 'none', sm: 'block' },
+            color: 'inherit',
+            textDecoration: 'inherit',
+            p: 1,
+            textAlign: 'center',
+          }}
+          component={Link}
+          key={id}
+          to={link}
+        >
+          {title}
+        </Typography>
+      ))}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        BackdropProps={{ invisible: true }}
         sx={{
-          display: {
-            xs: menuDisplay,
-            sm: 'flex',
+          overflowY: 'scroll',
+          '& :focus': {
+            outline: 'none',
           },
-          width: '100%',
-          backgroundColor: { xs: 'white', sm: 'transparent' },
-          position: { xs: 'absolute', sm: 'relative' },
-          left: 0,
-          right: 0,
-          top: { xs: theme.mixins.navbar.height, sm: 0 },
-          borderBottom: { xs: 1, sm: 0 },
-          borderTop: { xs: 1, sm: 0 },
         }}
       >
-        {links.map(({ id, title, link }) => (
-          <Typography
-            onClick={handleMenuDisplay}
-            variant="boldTextXs"
-            sx={{
-              display: { xs: 'block', sm: 'block' },
-              color: 'inherit',
-              textDecoration: 'inherit',
-              p: 1,
-              textAlign: 'center',
-            }}
-            component={Link}
-            key={id}
-            to={link}
-          >
-            {title}
-          </Typography>
-        ))}
-      </Box>
-      <MenuIcon onClick={handleMenuDisplay} sx={{ display: { xs: 'block', sm: 'none' } }} />
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 90,
+            right: 0,
+            left: 0,
+
+            bgcolor: 'white',
+            justifyContent: 'center',
+            alignItems: 'center',
+            border: '1px solid #cbcbcb',
+            p: 1,
+          }}
+        >
+          {links.map(({ id, title, link }) => (
+            <Typography
+              onClick={handleClose}
+              variant="boldTextXs"
+              sx={{
+                display: 'block',
+                color: 'inherit',
+                textDecoration: 'inherit',
+                p: 1,
+                textAlign: 'center',
+              }}
+              component={Link}
+              key={id}
+              to={link}
+            >
+              {title}
+            </Typography>
+          ))}
+        </Box>
+      </Modal>
+      <MenuIcon onClick={handleOpen} sx={{ display: { xs: 'block', sm: 'none' } }} />
     </Box>
   );
 };
