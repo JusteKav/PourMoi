@@ -61,15 +61,22 @@ The project requires a database, so you need to create a new database with Mongo
    ```sh
    npm install
    ```
-4. Fill your env. file
+4. Fill your env. file in frontEnd and backEnd
    ```js
+   //backEnd env. file example
    SERVER_PORT=
    SERVER_DOMAIN=
    DB_CONNECTION=
    HASH_SECRET=
    TOKEN_SECRET=
    PUBLIC_PATH=
-   IMG_FOLDER_NAME=;
+   IMG_FOLDER_NAME=
+   
+   //frontkEnd env. file example
+   REACT_APP_SERVER_PORT=
+   REACT_APP_SERVER_DOMAIN=
+   
+   //server domain and server port must match
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -87,18 +94,6 @@ The absence of a delete icon means that with this specified type, color, etc. a 
 ![image](https://user-images.githubusercontent.com/90303972/156747041-97890e64-5d77-4ca5-ac01-040dae37d759.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- CONTACT -->
-
-## Contact
-
-Justė Kavaliauskaitė - justekavaliauskaite2gmail.com
-
-Project Link: [https://github.com/JusteKav/PourMoi](https://github.com/JusteKav/PourMoi)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
 
 ## Acknowledgments
 
