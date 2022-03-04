@@ -45,9 +45,18 @@ const Hero = () => {
               width: { xs: '100%', md: '210px', lg: '282px' },
             }}
           >
-            <StyledLink sx={{ fontSize: { xs: 24, md: 32, lg: 44 }, color: '#f6f4f0' }} title="SHOP" link="/items" />
             <StyledLink
-              sx={{ fontSize: { xs: 24, md: 32, lg: 44 }, color: { xs: '#f6f4f0', md: 'black' }, p: 1 }}
+              sx={{ fontSize: { xs: 24, md: 32, lg: 44 }, fontWeight: 300, color: '#f6f4f0' }}
+              title="SHOP"
+              link="/items"
+            />
+            <StyledLink
+              sx={{
+                fontSize: { xs: 24, md: 32, lg: 44 },
+                color: { xs: '#f6f4f0', md: 'black' },
+                fontWeight: 300,
+                p: 1,
+              }}
               title="NOW"
               link="/items"
             />

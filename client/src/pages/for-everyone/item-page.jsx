@@ -4,6 +4,10 @@ import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
 import DiamondOutlinedIcon from '@mui/icons-material/DiamondOutlined';
 import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
 import Carousel from 'react-material-ui-carousel';
+import API from '../../services/api-service';
+import StyledLink from '../../components/partials/styled-small-components/styled-link';
+import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 const freeOffersData = [
   { iconName: <HttpsOutlinedIcon />, text: '30 days for exchanges and returns' },
@@ -11,30 +15,24 @@ const freeOffersData = [
   { iconName: <ChangeCircleOutlinedIcon />, text: '2 years warranty' },
 ];
 
+// console.log(data);
+
+// const data = API.getJewelry('621f732f859988de46771399');
 const ItemPage = () => {
   const theme = useTheme();
+  const { id } = useParams();
+  const [data, setData] = useState([]);
 
-  const itemData = [
-    { name: 'MATERIAL: ', text: '925 Sterling Silver' },
-    {
-      name: 'STONES: ',
-      text: 'Sapphire Blue Corundum Rhodolite zirconia Champagne zirconia Golden Yellow zirconia Pure White zirconia',
-    },
-    { name: 'WEIGHT: ', text: '6,2 g' },
-  ];
+  const getJewelry = async () => {
+    const jewelry = await API.getJewelry(id);
+    setData(jewelry);
+  };
 
-  const items = [
-    {
-      image: 'https://cdn.shopify.com/s/files/1/2803/4000/products/AR01-307-U_2_700x.jpg?v=1639648192',
-    },
-    {
-      image: 'https://cdn.shopify.com/s/files/1/2803/4000/products/AR01-307-U_0_700x.jpg?v=16396481924',
-    },
-    {
-      image: 'https://cdn.shopify.com/s/files/1/2803/4000/products/AR01-307-U_5_700x.jpg?v=1639648192',
-    },
-  ];
+  useEffect(() => {
+    getJewelry();
+  }, []);
 
+  console.log(data);
   return (
     <AlignmentContainer
       sx={{
@@ -42,80 +40,97 @@ const ItemPage = () => {
         alignItems: 'start',
       }}
     >
-      <Grid container>
-        <Grid item xs={12} sx={{ pb: 4 }}>
-          <Typography variant="regularTextXs">🠔 Back</Typography>
-        </Grid>
-        <Grid item xs={12} sm={8} md={7}>
-          <Box>
-            <Carousel navButtonsAlwaysVisible={false} indicators={false} topAutoPlayOnHover={true}>
-              {items.map((item, i) => (
-                <Box key={i} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Box
-                    sx={{
-                      backgroundImage: `url(${item.image})`,
-                      height: { xs: '60vh', sm: 650 },
-                      backgroundPosition: 'center',
-                      backgroundSize: 'cover',
-                      width: '100%',
-                    }}
-                  ></Box>
-                </Box>
-              ))}
-            </Carousel>
-          </Box>
-        </Grid>
-
-        <Grid
-          item
-          xs={12}
-          sm={4}
-          md={5}
-          sx={{ px: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
-        >
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              mb: { xs: 3, sm: '15%' },
-              flexDirection: { xs: 'column', md: 'row' },
-              pt: 2,
-            }}
+      {data.length !== 0 ? (
+        <Grid container>
+          <Grid item xs={12} sx={{ pb: 4 }}>
+            <StyledLink title={'🠔 Back'} link={`/items`} sx={{ fontWeight: 400 }}></StyledLink>
+          </Grid>
+          <Grid item xs={12} sm={8} md={7}>
+            <Box>
+              <Carousel navButtonsAlwaysVisible={false} indicators={false} topAutoPlayOnHover={true}>
+                {data.files.map((file, i) => (
+                  <Box key={i} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Box
+                      sx={{
+                        backgroundImage: `url(${file})`,
+                        height: { xs: '60vh', sm: 650 },
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        width: '100%',
+                      }}
+                    ></Box>
+                  </Box>
+                ))}
+              </Carousel>
+            </Box>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            md={5}
+            sx={{ px: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
           >
-            <Typography variant="boldTextM">TIGER GOLD EARRINGS</Typography>
-            <Typography variant="boldTextM">€135,00</Typography>
-          </Box>
-          <Box>
-            {itemData.map(({ name, text }) => {
-              return (
-                <Box sx={{ dispay: 'flex' }} key={name}>
-                  <Typography variant="boldTextXs">{name}</Typography>
-                  <Typography variant="regularTextXs">{text}</Typography>
-                </Box>
-              );
-            })}
-
-            <Button variant="outlined" sx={{ backgroundColor: 'black', width: '100%', borderRadius: 0, mt: 3 }}>
-              ADD TO CART
-            </Button>
-          </Box>
-          <Box sx={{ flexGrow: 1 }}></Box>
-          <Box>
-            <Divider sx={{ mt: 3, mb: 1 }} />
-
-            {freeOffersData.map(({ iconName, text }) => {
-              return (
-                <Box sx={{ display: 'flex', alignItems: 'center' }} key={text}>
-                  {iconName}
-                  <Typography sx={{ mx: 1 }} variant="regularTextXs">
-                    {text}
-                  </Typography>
-                </Box>
-              );
-            })}
-          </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                mb: { xs: 3, sm: '15%' },
+                flexDirection: { xs: 'column', md: 'row' },
+                pt: 2,
+              }}
+            >
+              <Typography variant="boldTextM">{data.title}</Typography>
+              <Typography variant="boldTextM">€{data.price}</Typography>
+            </Box>
+            <Box>
+              <Box sx={{ dispay: 'flex' }}>
+                <Typography variant="boldTextXs">MATERIAL: </Typography>
+                <Typography variant="regularTextXs">dcdc</Typography>
+              </Box>
+              <Box sx={{ dispay: 'flex' }}>
+                <Typography variant="boldTextXs">COLOR: </Typography>
+                <Typography variant="regularTextXs">{data.color.title}</Typography>
+              </Box>
+              <Box sx={{ dispay: 'flex' }}>
+                <Typography variant="boldTextXs">WEIGHT: </Typography>
+                <Typography variant="regularTextXs">{data.weight} g</Typography>
+              </Box>
+              <Box sx={{ dispay: 'flex' }}>
+                <Typography variant="boldTextXs">TYPE: </Typography>
+                <Typography variant="regularTextXs">{data.type.title}</Typography>
+              </Box>
+              <Box sx={{ dispay: 'flex' }}>
+                <Typography variant="boldTextXs">{data.stones.length !== 0 ? 'STONES: ' : null} </Typography>
+                {data.stones.length !== 0
+                  ? data.stones.map((stone) => (
+                      <Typography key={stone.id} variant="regularTextXs">
+                        {`${stone.title} | `}
+                      </Typography>
+                    ))
+                  : null}
+              </Box>
+              <Button variant="outlined" sx={{ backgroundColor: 'black', width: '100%', borderRadius: 0, mt: 3 }}>
+                ADD TO CART
+              </Button>
+            </Box>
+            <Box sx={{ flexGrow: 1 }}></Box>
+            <Box>
+              <Divider sx={{ mt: 3, mb: 1 }} />
+              {freeOffersData.map(({ iconName, text }) => {
+                return (
+                  <Box sx={{ display: 'flex', alignItems: 'center' }} key={text}>
+                    {iconName}
+                    <Typography sx={{ mx: 1 }} variant="regularTextXs">
+                      {text}
+                    </Typography>
+                  </Box>
+                );
+              })}
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
+      ) : null}
     </AlignmentContainer>
   );
 };

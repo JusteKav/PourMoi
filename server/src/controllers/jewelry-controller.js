@@ -40,7 +40,11 @@ const createJewelry = async (req, res) => {
 const getJewelry = async (req, res) => {
   const { id } = req.params;
   try {
-    const jewelryDoc = await JewelryModel.findById(id).populate('color').populate('material').populate('type');
+    const jewelryDoc = await await JewelryModel.findById(id)
+      .populate('color')
+      .populate('material')
+      .populate('type')
+      .populate('stones');
     const jewelry = new JewelryViewModel(jewelryDoc);
     res.status(200).json(jewelry);
   } catch (error) {
@@ -53,7 +57,11 @@ const getJewelry = async (req, res) => {
 const deleteJewelry = async (req, res) => {
   const { id } = req.params;
   try {
-    const jewelryDoc = await JewelryModel.findByIdAndDelete(id).populate('color').populate('material').populate('type');
+    const jewelryDoc = await await JewelryModel.findByIdAndDelete(id)
+      .populate('color')
+      .populate('material')
+      .populate('type')
+      .populate('stones');
     const jewelry = new JewelryViewModel(jewelryDoc);
     jewelry.files.map((file) => {
       const imgPath = `./public/assets/images/${file.slice(22)}`;

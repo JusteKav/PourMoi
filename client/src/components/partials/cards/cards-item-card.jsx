@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { authSelector } from '../../../store/auth';
 import { Typography, Box, Card, CardMedia } from '@mui/material';
@@ -9,6 +10,7 @@ import UpdateIcon from '@mui/icons-material/Update';
 import API from '../../../services/api-service';
 import AdminPopupDashboard from '../../../pages/for-everyone/items-page/items-page-admin-jewelry-modal';
 import { JewelryContext } from '../../../contexts/contexts-jewelry-data';
+import StyledLink from '../styled-small-components/styled-link';
 
 const ItemCard = ({ jewelry }) => {
   const { files, title, material, price, weight, color, type, stones } = jewelry;
@@ -19,11 +21,23 @@ const ItemCard = ({ jewelry }) => {
     await API.deleteJewelry(jewelry);
     await jewelryState.getData();
   };
+
+  const navigate = useNavigate();
+  const handleNavigation = () => {
+    navigate(`/item/${jewelry.id}`);
+  };
+
   return (
     <Card sx={{ width: '100%', height: '100%', position: 'relative', p: 0 }}>
-      <CardMedia image={files[0]} component="img" sx={{ width: '100%' }} alt="jewelry" />
+      <CardMedia
+        onClick={() => handleNavigation()}
+        image={files[0]}
+        component="img"
+        sx={{ width: '100%' }}
+        alt="jewelry"
+      />
       <Box sx={{ backgroundColor: 'white', p: { xs: 2, md: 2 } }}>
-        <Typography sx={{ fontWeight: 500 }}>{title}</Typography>
+        <StyledLink title={title} link={`/item/${jewelry.id}`}></StyledLink>
         <Typography sx={{ display: { xs: 'none', sm: 'block' } }}>{material.title}</Typography>
         <Typography>€{price}</Typography>
         {auth.user !== null ? (

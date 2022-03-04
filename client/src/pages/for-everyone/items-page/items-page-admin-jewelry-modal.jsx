@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useState } from 'react';
 import { TextField, Grid, Box, Button, Dialog, Select, MenuItem, InputLabel, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -16,18 +16,28 @@ const validationSchema = yup.object({
   color: yup.string().required('Color is required'),
   material: yup.string().required('Material required'),
   type: yup.string().required('Type required'),
-  // files: yup.string().required('A file is required'),
+  // files: yup.string().test('is-allowed-HsCode', 'This type already exists', (val) => checkTitle(val, materials)),
 });
 
 const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
   const initialValues = { ...initialDataValues };
   const jewelryState = useContext(JewelryContext);
+  const [error, setError] = useState(false);
 
   const fileUploadRef = useRef(null);
 
-  const onSubmit = async (values, { resetForm }) => {
-    console.log(values);
+  const checkFiles = () => {
     const files = Array.from(fileUploadRef.current.files);
+    if (files.length !== 0) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+  };
+
+  const onSubmit = async (values, { resetForm }) => {
+    const files = Array.from(fileUploadRef.current.files);
+    checkFiles();
     const addedJewelery = {
       ...values,
       files: files.length !== 0 ? files : oldValues.files,
@@ -41,7 +51,7 @@ const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
         ...addedJewelery,
         files: files.length !== 0 ? [...files, ...oldValues.files] : oldValues.files,
       });
-      resetForm({ files: [] });
+      values.files = [];
     }
     jewelryState.getData();
     handleClose();
@@ -82,7 +92,6 @@ const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
                 value={values.title}
                 onChange={handleChange}
                 error={touched.title && Boolean(errors.title)}
-                // helperText={touched.title && errors.title}
                 onBlur={handleBlur}
                 fullWidth
               />
@@ -213,7 +222,11 @@ const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
             </Grid>
             <Grid item xs={12}>
               {initialDataValues.title === '' ? (
-                <InputLabel>Upload images (3 are recommended)</InputLabel>
+                !error ? (
+                  <InputLabel>Upload images (3 are recommended)</InputLabel>
+                ) : (
+                  <InputLabel sx={{ color: 'red' }}>Upload images (3 are recommended)</InputLabel>
+                )
               ) : (
                 <InputLabel>Change all images</InputLabel>
               )}
@@ -223,9 +236,12 @@ const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
                 inputProps={{ multiple: true }}
                 variant="outlined"
                 value={values.files}
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  checkFiles();
+                }}
                 fullWidth
-                error={touched.files && Boolean(errors.files) && initialValues.title === ''}
+                error={touched.files && initialValues.title === '' && error}
                 onBlur={handleBlur}
                 inputRef={fileUploadRef}
               />
@@ -234,7 +250,13 @@ const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
               )}
             </Grid>
             <Grid item xs={12}>
-              <Button sx={{ my: 2, height: '40px' }} variant="contained" fullWidth type="submit">
+              <Button
+                sx={{ my: 2, height: '40px' }}
+                variant="contained"
+                fullWidth
+                onClick={() => checkFiles()}
+                type="submit"
+              >
                 Submit
               </Button>
             </Grid>

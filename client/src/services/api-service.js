@@ -19,6 +19,15 @@ const getJewelries = async () => {
   }
 };
 
+const getJewelry = async (id) => {
+  try {
+    const response = await instance.get(`/jewelries/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 const addJewelry = async (jewelry) => {
   try {
     const data = new FormData();
@@ -142,6 +151,87 @@ const updateColor = async (color) => {
   }
 };
 
+const addType = async (type) => {
+  try {
+    const response = await instance.post('/types', type);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const deleteType = async (type) => {
+  try {
+    const response = await instance.delete(`/types/${type.id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const updateType = async (type) => {
+  try {
+    const response = await instance.patch(`/types/${type.id}`, type);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const addMaterial = async (material) => {
+  try {
+    const response = await instance.post('/materials', material);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const deleteMaterial = async (material) => {
+  try {
+    const response = await instance.delete(`/materials/${material.id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const updateMaterial = async (material) => {
+  try {
+    const response = await instance.patch(`/materials/${material.id}`, material);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const addStone = async (stone) => {
+  try {
+    const response = await instance.post('/stones', stone);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const deleteStone = async (stone) => {
+  try {
+    const response = await instance.delete(`/stones/${stone.id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const updateStone = async (stone) => {
+  try {
+    const response = await instance.patch(`/stones/${stone.id}`, stone);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 const updateUserData = async (user) => {
   const token = validateToken();
   await instance.patch(`/api/users/${user.id}`, user, {
@@ -165,6 +255,7 @@ const API = {
   getJewelries,
   addJewelry,
   deleteJewelry,
+  getJewelry,
   updateJewelry,
   getStones,
   getMaterials,
@@ -174,6 +265,15 @@ const API = {
   addColor,
   updateUserData,
   updateColor,
+  addType,
+  deleteType,
+  updateType,
+  addMaterial,
+  deleteMaterial,
+  updateMaterial,
+  addStone,
+  deleteStone,
+  updateStone,
   // checkColor,
 };
 

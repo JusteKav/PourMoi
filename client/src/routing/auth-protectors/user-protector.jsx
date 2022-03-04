@@ -14,7 +14,7 @@ const UserProtector = ({ children }) => {
   }
 
   if (auth.user.role !== 'USER') {
-    return <Navigate to={routes.ProfilePage} />;
+    return <Navigate to={routes.HomePage} />;
   }
 
   return children;

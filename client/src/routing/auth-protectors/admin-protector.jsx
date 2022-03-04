@@ -9,11 +9,11 @@ const AdminProtector = ({ children }) => {
   const auth = useSelector(authSelector);
 
   if (!auth.loggedIn) {
-    return <Navigate to={`${routes.LoginPage}?redirectTo=${pathname}`} />;
+    return <Navigate to={routes.LoginPage} />;
   }
 
   if (auth.user.role !== 'ADMIN') {
-    return <Navigate to={routes.LoginPage} />;
+    return <Navigate to={routes.HomePage} />;
   }
 
   return children;
