@@ -11,7 +11,7 @@ const AuthForm = ({ children, title, linkTo, linkTitle, loading, onSubmit, isVal
     <BackgroundImageContainer
       sx={{
         minHeight: `calc(100vh - ${theme.mixins.footer.height}  - ${theme.mixins.navbar.height}) `,
-        width: '100vw',
+        width: '100%',
         backgroundPosition: '50% 60%',
       }}
       image={'url(https://cdn.shopify.com/s/files/1/2803/4000/t/223/assets/EDIT_APRIL_03.jpg?v=17043634736278866482)'}

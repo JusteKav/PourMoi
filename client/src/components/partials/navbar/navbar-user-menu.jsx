@@ -31,13 +31,14 @@ const UserMenu = () => {
     <>
       <Box sx={{ width: 72, height: 30, display: { xs: 'none', sm: 'block' } }}></Box>
       <Typography sx={{ fontSize: { xs: 36, sm: 48 } }}>PourMoi</Typography>
-      <Box sx={{ height: '100%', display: 'flex', alignItems: 'center', position: 'relative' }}>
+      <Box sx={{ height: '100%', display: 'flex', alignItems: 'center' }}>
         <PermIdentityIcon onClick={handleOpen} sx={{ fontSize: { xs: 20, sm: 24 } }} />
         <Modal
           open={open}
           onClose={handleClose}
           BackdropProps={{ invisible: true }}
           sx={{
+            overflowY: 'scroll',
             '& :focus': {
               outline: 'none',
             },
@@ -47,9 +48,9 @@ const UserMenu = () => {
             sx={{
               position: 'absolute',
               top: 46,
-              right: 32,
+              right: { xs: 24, lg: `calc((100vw - 1154px)/2) ` },
               height: 90,
-              width: 150,
+              width: 145,
               bgcolor: 'white',
               display: 'flex',
               justifyContent: 'center',

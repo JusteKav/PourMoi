@@ -53,7 +53,7 @@ const ItemPage = () => {
                     <Box
                       sx={{
                         backgroundImage: `url(${file})`,
-                        height: { xs: '60vh', sm: 650 },
+                        height: { xs: '60vh', sm: '650' },
                         backgroundPosition: 'center',
                         backgroundSize: 'cover',
                         width: '100%',

@@ -9,7 +9,12 @@ const Navbar = () => {
         <Grid
           item
           xs={12}
-          sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '50%' }}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            height: '50%',
+          }}
         >
           <UserMenu />
         </Grid>
