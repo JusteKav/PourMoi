@@ -63,7 +63,7 @@ The project requires a database, so you need to create a new database with Mongo
    ```
 4. Fill your env. file in frontEnd and backEnd
    ```js
-   //backEnd env. file example
+   //backend env. file example
    SERVER_PORT=
    SERVER_DOMAIN=
    DB_CONNECTION=
@@ -72,7 +72,7 @@ The project requires a database, so you need to create a new database with Mongo
    PUBLIC_PATH=
    IMG_FOLDER_NAME=
    
-   //frontkEnd env. file example
+   //frontend env. file example
    REACT_APP_SERVER_PORT=
    REACT_APP_SERVER_DOMAIN=
    
