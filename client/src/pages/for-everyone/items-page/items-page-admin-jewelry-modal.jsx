@@ -16,7 +16,6 @@ const validationSchema = yup.object({
   color: yup.string().required('Color is required'),
   material: yup.string().required('Material required'),
   type: yup.string().required('Type required'),
-  // files: yup.string().test('is-allowed-HsCode', 'This type already exists', (val) => checkTitle(val, materials)),
 });
 
 const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
@@ -68,6 +67,7 @@ const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -202,19 +202,9 @@ const AdminJewelryModal = ({ initialDataValues, icon, oldValues }) => {
             </Grid>
             <Grid item xs={12}>
               <InputLabel>Select stones (not required)</InputLabel>
-              <Select
-                variant="outlined"
-                multiple
-                name="stones"
-                value={values.stones}
-                onChange={handleChange}
-                fullWidth
-                // renderValue={(selected) => selected.join(',')}
-              >
+              <Select variant="outlined" multiple name="stones" value={values.stones} onChange={handleChange} fullWidth>
                 {jewelryState.stones.map((stone) => (
                   <MenuItem key={stone.id} value={stone.id}>
-                    {/* <Checkbox color="secondary" />
-                    <ListItemText primary={stone.title} /> */}
                     {stone.title}
                   </MenuItem>
                 ))}

@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { authSelector } from '../../../store/auth';
-import { Grid, Typography, Divider, useTheme } from '@mui/material';
+import { Grid, Typography, Divider, useTheme, TextField, Box } from '@mui/material';
 import AlignmentContainer from '../../../components/partials/containers/alignment-container';
 import ItemCard from '../../../components/partials/cards/cards-item-card';
 import SortIcon from '@mui/icons-material/Sort';
@@ -11,12 +11,17 @@ import FiltersModal from './items-page-filters-modal';
 import AdminJewelryModal from './items-page-admin-jewelry-modal';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { JewelryContext } from '../../../contexts/contexts-jewelry-data';
+import SearchIcon from '@mui/icons-material/Search';
 
 const ItemsPage = () => {
   const jewelryState = useContext(JewelryContext);
-
   const theme = useTheme();
   const auth = useSelector(authSelector);
+  const [value, setValue] = useState('');
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
 
   return (
     <AlignmentContainer
@@ -60,7 +65,7 @@ const ItemsPage = () => {
       <Grid container spacing={2}>
         {auth.user !== null ? (
           auth.user.role === 'ADMIN' ? (
-            <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+            <Grid item xs={6} sx={{ display: 'flex', alignItems: 'center' }}>
               <AdminJewelryModal
                 icon={<AddCircleIcon />}
                 initialDataValues={{
@@ -79,13 +84,23 @@ const ItemsPage = () => {
             </Grid>
           ) : null
         ) : null}
-        {jewelryState.data.map((jewelry) => {
-          return (
-            <Grid item xs={6} md={4} lg={3} key={jewelry.id}>
-              <ItemCard jewelry={jewelry} />
-            </Grid>
-          );
-        })}
+        <Grid
+          item
+          xs={auth.user !== null && auth.user.role === 'ADMIN' ? 6 : 12}
+          sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center' }}
+        >
+          <SearchIcon sx={{ mr: 1 }} />
+          <TextField onChange={(e) => handleChange(e)} size="small" placeholder="Search"></TextField>
+        </Grid>
+        {jewelryState.data
+          .filter((el) => el.title.includes(value.toUpperCase()))
+          .map((jewelry) => {
+            return (
+              <Grid item xs={6} md={4} lg={3} key={jewelry.id}>
+                <ItemCard jewelry={jewelry} />
+              </Grid>
+            );
+          })}
       </Grid>
     </AlignmentContainer>
   );

@@ -13,14 +13,8 @@ const routeStructure = [
       { path: 'profile', pageName: 'ProfilePage', auth: USER },
       { path: 'data-edit', pageName: 'DataEditPage', auth: ADMIN },
       { path: '*', pageName: 'ErrorPage' },
-      {
-        path: '/',
-        pageName: 'ViewportLayout',
-        childRoutes: [
-          { path: 'login', pageName: 'LoginPage', auth: PUBLIC_ONLY },
-          { path: 'register', pageName: 'RegisterPage', auth: PUBLIC_ONLY },
-        ],
-      },
+      { path: 'login', pageName: 'LoginPage', auth: PUBLIC_ONLY },
+      { path: 'register', pageName: 'RegisterPage', auth: PUBLIC_ONLY },
     ],
   },
 ];

@@ -1,6 +1,5 @@
 // layouts
 import NavbarAndFooterLayout from '../components/layouts/navbar-and-footer-layout';
-import ViewportLayout from '../components/layouts/viewport-layout';
 // no-auth
 import HomePage from '../pages/for-everyone/home-page';
 import ItemsPage from '../pages/for-everyone/items-page';
@@ -27,7 +26,6 @@ const exportedObject = {
   OrderPage,
   ErrorPage,
   NavbarAndFooterLayout,
-  ViewportLayout,
   DataEditPage,
 };
 

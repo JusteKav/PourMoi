@@ -5,32 +5,39 @@ import API from '../services/api-service';
 export const JewelryContext = createContext();
 
 export const useProducts = () => {
-  const [data, setData] = useState([]);
-  const [colors, setColors] = useState([]);
-  const [materials, setMaterials] = useState([]);
-  const [types, setTypes] = useState([]);
-  const [stones, setStones] = useState([]);
+  const [state, setState] = useState({
+    data: [],
+    colors: [],
+    materials: [],
+    types: [],
+    stones: [],
+  });
+
+  const { data, colors, materials, stones, types } = state;
 
   const getData = async () => {
-    const fetchedProducts = await API.getJewelries();
-    const fetchedColors = await API.getColors();
-    const fetcheMaterials = await API.getMaterials();
-    const fetchedStones = await API.getStones();
-    const fetchedTypes = await API.getTypes();
-    setData(fetchedProducts);
-    setColors(fetchedColors);
-    setMaterials(fetcheMaterials);
-    setTypes(fetchedTypes);
-    setStones(fetchedStones);
+    const [fetchedProducts, fetchedColors, fetcheMaterials, fetchedTypes, fetchedStones] = await Promise.all([
+      API.getJewelries(),
+      API.getColors(),
+      API.getMaterials(),
+      API.getTypes(),
+      API.getStones(),
+    ]);
+    setState({
+      data: fetchedProducts.reverse(),
+      colors: fetchedColors,
+      materials: fetcheMaterials,
+      types: fetchedTypes,
+      stones: fetchedStones,
+    });
   };
 
   useEffect(() => {
     getData();
-  }, [data.length, colors.length, materials.length, types.length, stones.length]);
-
+  }, [data.length, colors.length, materials.length, stones.length, types.length, setState]);
   const jewelryState = useMemo(
-    () => ({ data, setData, getData, colors, materials, types, stones }),
-    [data, setData, colors, materials, types, stones]
+    () => ({ data, colors, materials, types, stones, getData }),
+    [data, colors, materials, types, stones]
   );
   return jewelryState;
 };

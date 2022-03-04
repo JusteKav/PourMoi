@@ -15,9 +15,6 @@ const freeOffersData = [
   { iconName: <ChangeCircleOutlinedIcon />, text: '2 years warranty' },
 ];
 
-// console.log(data);
-
-// const data = API.getJewelry('621f732f859988de46771399');
 const ItemPage = () => {
   const theme = useTheme();
   const { id } = useParams();
@@ -32,7 +29,6 @@ const ItemPage = () => {
     getJewelry();
   }, []);
 
-  console.log(data);
   return (
     <AlignmentContainer
       sx={{
@@ -53,7 +49,7 @@ const ItemPage = () => {
                     <Box
                       sx={{
                         backgroundImage: `url(${file})`,
-                        height: { xs: '60vh', sm: '650' },
+                        height: { xs: '60vh', sm: 650 },
                         backgroundPosition: 'center',
                         backgroundSize: 'cover',
                         width: '100%',
@@ -86,7 +82,7 @@ const ItemPage = () => {
             <Box>
               <Box sx={{ dispay: 'flex' }}>
                 <Typography variant="boldTextXs">MATERIAL: </Typography>
-                <Typography variant="regularTextXs">dcdc</Typography>
+                <Typography variant="regularTextXs">{data.material.title}</Typography>
               </Box>
               <Box sx={{ dispay: 'flex' }}>
                 <Typography variant="boldTextXs">COLOR: </Typography>

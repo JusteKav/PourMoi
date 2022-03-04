@@ -81,7 +81,7 @@ const ItemsPageSidebar = () => {
               </FormGroup>
             </Box>
             <Box sx={{ pt: 4 }}>
-              <Typography variant="boldTextXs">COLOR</Typography>
+              <Typography variant="boldTextXs">MATERIAL</Typography>
               <FormGroup sx={{ py: 1 }}>
                 {materials.map(({ id, title }) => {
                   return (

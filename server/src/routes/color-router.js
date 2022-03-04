@@ -14,6 +14,5 @@ router.post('/', createColor);
 router.get('/:id', getColor);
 router.delete('/:id', deleteColor);
 router.patch('/:id', updateColor);
-// router.get('/check-color/', checkColor);
 
 module.exports = router;

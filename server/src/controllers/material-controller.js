@@ -68,27 +68,10 @@ const updateMaterial = async (req, res) => {
   }
 };
 
-// const replaceMaterial = async (req, res) => {
-//   const { id } = req.params;
-//   const { title } = req.body;
-//   const material = material.find((x) => x.id === id);
-//   if (material) {
-//     if (title) {
-//       material.title = title;
-//       res.status(200).json(material);
-//     } else {
-//       res.status(400).json({ message: 'Nepakanka duomenų' });
-//     }
-//   } else {
-//     res.status(404).json({ message: 'Tipas nerastas' });
-//   }
-// };
-
 module.exports = {
   getMaterials,
   createMaterial,
   getMaterial,
   deleteMaterial,
   updateMaterial,
-  //   replaceMaterial,
 };

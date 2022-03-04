@@ -9,7 +9,11 @@ const NavbarLayout = () => {
   return (
     <Box>
       <Navbar />
-      <Box sx={{ mt: theme.mixins.navbar.height }}>
+      <Box
+        sx={{
+          mt: theme.mixins.navbar.height,
+        }}
+      >
         <Outlet />
       </Box>
       <Footer />

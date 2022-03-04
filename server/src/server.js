@@ -15,7 +15,7 @@ const jewelryRouter = require('./routes/jewelry-router');
 const server = express();
 const { PUBLIC_PATH, IMG_FOLDER_NAME, SERVER_PORT, DB_CONNECTION, SERVER_DOMAIN, CLIENT_PORT } = process.env;
 const corsOptions = {
-  origin: `${SERVER_DOMAIN}:${CLIENT_PORT}`,
+  // origin: `${SERVER_DOMAIN}:3000`,
   optionsSuccessStatus: 200,
 };
 // Middlewares

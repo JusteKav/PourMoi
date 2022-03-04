@@ -68,27 +68,10 @@ const updateType = async (req, res) => {
   }
 };
 
-// const replaceType = async (req, res) => {
-//   const { id } = req.params;
-//   const { title } = req.body;
-//   const type = types.find((x) => x.id === id);
-//   if (type) {
-//     if (title) {
-//       type.title = title;
-//       res.status(200).json(type);
-//     } else {
-//       res.status(400).json({ message: 'Nepakanka duomenų' });
-//     }
-//   } else {
-//     res.status(404).json({ message: 'Tipas nerastas' });
-//   }
-// };
-
 module.exports = {
   getTypes,
   createType,
   getType,
   deleteType,
   updateType,
-  // replaceType,
 };

@@ -13,7 +13,6 @@ const ColorsEdit = () => {
   const [colorData, setColorData] = useState('');
   const [changeColorDisplay, setChangeColorDisplay] = useState('none');
   const { colors, getData, data } = useContext(JewelryContext);
-  // const [initialValuess, setInitialValues] = useState({ title: '' });
   let initialValues = { title: '' };
 
   const handleDisplay = () => {
@@ -54,7 +53,6 @@ const ColorsEdit = () => {
 
   const handleReplace = (color) => {
     setColorData(color);
-    // setInitialValues({ title: 'valu' });
     handleDisplay();
   };
 

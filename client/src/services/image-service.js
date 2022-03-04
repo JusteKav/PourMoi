@@ -4,7 +4,7 @@ const { IMG_FOLDER_NAME } = process.env;
 const ImageService = new (class ProfileService {
   constructor() {
     this.requester = axios.create({
-      baseURL: 'http://localhost:5070',
+      baseURL: `${process.env.REACT_APP_SERVER_DOMAIN}:${process.env.REACT_APP_SERVER_PORT}`,
       headers: { 'Content-Type': 'application/json' },
     });
   }
