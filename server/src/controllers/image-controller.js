@@ -1,6 +1,7 @@
 const ImageModel = require('../models/image-model');
 const ImageViewModel = require('../view-models/image-view-model');
 const { deleteFile } = require('../helpers/file-helpers');
+const { PUBLIC_PATH, IMG_FOLDER_NAME } = process.env;
 
 const getImages = async (req, res) => {
   const imageDocs = await ImageModel.find();
@@ -30,7 +31,7 @@ const deleteImage = async (req, res) => {
   const { id } = req.params;
   try {
     const imageDoc = await ImageModel.findById(id);
-    const imgPath = `http://localhost:5070/public/assets/images/${imageDoc.src}`;
+    const imgPath = `http://localhost:5070/${PUBLIC_PATH}/${IMG_FOLDER_NAME}/${imageDoc.src}`;
     deleteFile(imgPath);
     await imageDoc.delete();
     res.status(200).send({

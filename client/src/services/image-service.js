@@ -1,4 +1,5 @@
 import axios from 'axios';
+const { IMG_FOLDER_NAME } = process.env;
 
 const ImageService = new (class ProfileService {
   constructor() {
@@ -14,7 +15,7 @@ const ImageService = new (class ProfileService {
       formData.append('files', files[i]);
     }
 
-    const { data } = await this.requester.post('/images/', formData, {
+    const { data } = await this.requester.post(`/${IMG_FOLDER_NAME}/`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -24,7 +25,7 @@ const ImageService = new (class ProfileService {
   }
 
   async deleteImage(id) {
-    await this.requester.delete(`images/${id}`, {
+    await this.requester.delete(`/${IMG_FOLDER_NAME}/${id}`, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

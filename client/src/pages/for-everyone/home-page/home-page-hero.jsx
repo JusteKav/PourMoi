@@ -1,4 +1,3 @@
-import MainGif from '../../../images/home-page-gif.gif';
 import { Button, Grid } from '@mui/material';
 import BackgroundImageContainer from '../../../components/partials/containers/background-image-container';
 import StyledLink from '../../../components/partials/styled-small-components/styled-link';
@@ -9,7 +8,7 @@ const Hero = () => {
       <Grid item md={8}>
         <BackgroundImageContainer
           sx={{ height: { xs: '70vh', md: '75vh' }, backgroundPosition: '50% 35%' }}
-          image={`url(https://cdn.shopify.com/s/files/1/2803/4000/t/223/assets/EDIT_APRIL_08.jpg?v=12297639666601562275)`}
+          image={`url(${process.env.REACT_APP_SERVER_DOMAIN}:${process.env.REACT_APP_SERVER_PORT}/1646399729646-132399674.jpg)`}
         />
       </Grid>
       <Grid item xs={12} md={4}>
@@ -22,8 +21,8 @@ const Hero = () => {
             py: 3,
           }}
           image={{
-            xs: `url(https://cdn.shopify.com/s/files/1/2803/4000/t/223/assets/EDIT_JUNE_03.jpg.jpg?v=5743875366788461305)`,
-            md: `url('https://cdn.shopify.com/s/files/1/2803/4000/products/CO01-275-U_3_600x.jpg?v=1628732318')`,
+            xs: `url(${process.env.REACT_APP_SERVER_DOMAIN}:${process.env.REACT_APP_SERVER_PORT}/1646399908450-838530903.jpg)`,
+            md: `url(${process.env.REACT_APP_SERVER_DOMAIN}:${process.env.REACT_APP_SERVER_PORT}/1646399192000-210642128.jpg)`,
           }}
         >
           <Button

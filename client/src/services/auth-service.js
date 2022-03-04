@@ -2,14 +2,13 @@ import axios from 'axios';
 import SessionService from './session-service';
 import reduxStore from '../store/index';
 import { login, logout, authFailed } from '../store/auth';
-
 // Singleton pattern - only one object of a class
 const AuthService = new (class AuthService {
   constructor() {
     const token = SessionService.get('auth_token');
 
     this.requester = axios.create({
-      baseURL: 'http://localhost:5070/api/auth',
+      baseURL: `${process.env.REACT_APP_SERVER_DOMAIN}:${process.env.REACT_APP_SERVER_PORT}/api/auth`,
       headers: { 'Content-Type': 'application/json' },
     });
 

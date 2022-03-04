@@ -1,8 +1,9 @@
 const multer = require('multer');
+const { PUBLIC_PATH, IMG_FOLDER_NAME } = process.env;
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, `public/assets/images`);
+    cb(null, `${PUBLIC_PATH}/${IMG_FOLDER_NAME}`);
   },
   filename: function (req, file, cb) {
     const { originalname } = file;

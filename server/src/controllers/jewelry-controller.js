@@ -1,6 +1,7 @@
 const JewelryModel = require('../models/jewelry-model');
 const JewelryViewModel = require('../view-models/jewelry-view-model');
 const { deleteFile } = require('../helpers/file-helpers');
+const { PUBLIC_PATH, IMG_FOLDER_NAME, SERVER_DOMAIN, SERVER_PORT } = process.env;
 
 const getJewelries = async (req, res) => {
   const jewelryDocs = await JewelryModel.find()
@@ -15,7 +16,7 @@ const getJewelries = async (req, res) => {
 const createJewelry = async (req, res) => {
   const { title, price, weight, color, material, type, stones } = req.body;
   const files = req.files;
-  const filesArr = files.map((file) => `http://localhost:5070/${file.filename}`);
+  const filesArr = files.map((file) => `${SERVER_DOMAIN}:${SERVER_PORT}/${file.filename}`);
   const jewelryDoc = await JewelryModel({
     title,
     price,
@@ -64,7 +65,7 @@ const deleteJewelry = async (req, res) => {
       .populate('stones');
     const jewelry = new JewelryViewModel(jewelryDoc);
     jewelry.files.map((file) => {
-      const imgPath = `./public/assets/images/${file.slice(22)}`;
+      const imgPath = `./${PUBLIC_PATH}/${IMG_FOLDER_NAME}/${file.slice(22)}`;
       deleteFile(imgPath);
     });
     res.status(200).json(jewelry);
@@ -82,10 +83,10 @@ const updateJewelry = async (req, res) => {
 
   const filesArr = (newFiles, oldFiles) => {
     if (newFiles[0]) {
-      const newArr = newFiles.map((file) => `http://localhost:5070/${file.filename}`);
+      const newArr = newFiles.map((file) => `${SERVER_DOMAIN}:${SERVER_PORT}/${file.filename}`);
       const oldFilesArr = oldFiles instanceof Array ? oldFiles : [oldFiles];
       oldFilesArr.map((file) => {
-        const imgPath = `./public/assets/images/${file.slice(22)}`;
+        const imgPath = `./${PUBLIC_PATH}/${IMG_FOLDER_NAME}/${file.slice(22)}`;
         deleteFile(imgPath);
       });
       return newArr;
