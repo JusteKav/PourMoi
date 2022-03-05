@@ -77,7 +77,7 @@ const ItemPage = () => {
               }}
             >
               <Typography variant="boldTextM">{data.title}</Typography>
-              <Typography variant="boldTextM">€{data.price}</Typography>
+              <Typography variant="boldTextM">€{data.price}.00</Typography>
             </Box>
             <Box>
               <Box sx={{ dispay: 'flex' }}>
