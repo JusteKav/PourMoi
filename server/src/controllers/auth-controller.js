@@ -48,7 +48,6 @@ const login = async (req, res) => {
       res.status(401).json({ message: 'Incorrect password' });
     }
   } catch (error) {
-    console.log(error);
     res.status(404).json({ message: 'Email is not found' });
   }
 };
