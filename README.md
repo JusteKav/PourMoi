@@ -18,7 +18,7 @@
 
 ![image](https://user-images.githubusercontent.com/90303972/156739865-a791dfe7-6750-49fc-894b-2424ee8a9824.png)
 
-PourMoi is an e-shop where you can buy high-quality jewelry made of silver or gold. It does not currently have full functionality, but the following features are available:
+PourMoi is an e-shop dublicate (only for testing different styles and commands). It does not currently have full functionality, but the following features are available:
 
 - registration and login
 - authentication and authorisation
